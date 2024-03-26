@@ -120,9 +120,10 @@ fn no_format(parent: &LinkedNode, children: &[String], ctx: &mut Ctx) -> String 
 
 fn raw_format(parent: &LinkedNode, children: &[String], ctx: &mut Ctx) -> String {
     let mut res = String::new();
-    for s in children {
-        ctx.push_raw_in(s, &mut res);
-    }
+    ctx.push_raw_in(parent.text(), &mut res);
+    // for s in children {
+    //     ctx.push_raw_in(s, &mut res);
+    // }
     res
 }
 
