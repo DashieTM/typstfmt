@@ -11,14 +11,7 @@ pub(crate) fn format_code_blocks(
 ) -> String {
     let children_contains_lines = children.iter().any(|c| c.contains('\n'));
     let parent_is_loop = [Some(ForLoop), Some(WhileLoop)].contains(&parent.parent_kind());
-    let mut code = utils::find_child(parent, &|x| x.kind() == Code);
-    if code.is_none() {
-        code = utils::find_child(parent, &|x| {
-
-        dbg!(x.kind());
-            x.kind() == Raw});
-    }
-    let code = code.unwrap();
+    let code = utils::find_child(parent, &|x| x.kind() == Code ).unwrap();
 
     if parent.children().any(|c| c.kind() == LineComment) {
         return format_code_blocks_breaking(parent, children, ctx);

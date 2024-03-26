@@ -73,7 +73,7 @@ fn visit(node: &LinkedNode, ctx: &mut Ctx) -> String {
         }
         LetBinding => format_let_binding(node, &res, ctx),
         Conditional => conditional_format(node, &res, ctx),
-        Raw => code_blocks::format_code_blocks(node, &res, ctx),
+        Raw => no_format(node, &res, ctx),
         BlockComment => {
             ctx.lost_context();
             node.text().to_string()
