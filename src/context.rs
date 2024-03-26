@@ -69,6 +69,7 @@ impl Ctx {
         let mut newlined = false;
         for c in s.chars() {
             match c {
+                '\t' => (),
                 '\n' => {
                     newlined = true;
                     result.push('\n');
