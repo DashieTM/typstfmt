@@ -68,7 +68,6 @@ impl Ctx {
     pub(crate) fn push_idk(&mut self, s: &str, result: &mut String) {
         let s = s.trim_start();
         result.push_str(s);
-        self.lost_context();
     }
 
     /// adds an indentation for each line the input except the first to match the current level of indentation.
