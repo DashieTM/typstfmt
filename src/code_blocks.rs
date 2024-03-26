@@ -12,7 +12,7 @@ pub(crate) fn format_code_blocks(
     let children_contains_lines = children.iter().any(|c| c.contains('\n'));
     let parent_is_loop = [Some(ForLoop), Some(WhileLoop)].contains(&parent.parent_kind());
     let mut code = utils::find_child(parent, &|x| x.kind() == Code);
-    let code = if let Some(code) = code { code } else { parent };
+    let code = if let Some(code) = code { &code } else { parent };
 
     if parent.children().any(|c| c.kind() == LineComment) {
         return format_code_blocks_breaking(parent, children, ctx);
