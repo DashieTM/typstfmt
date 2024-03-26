@@ -66,20 +66,21 @@ impl Ctx {
     /// makes the context aware it missed info,
     /// should be called when pushing directly in result.
     pub(crate) fn push_idk(&mut self, s: &str, result: &mut String) {
+        let mut newlined = false;
         for c in s.chars() {
             match c {
                 '\n' => {
-                    if self.consec_new_line <= 1 {
-                        self.consec_new_line += 1;
-                        result.push('\n');
-                    } else {
-                        debug!("IGNORED newline");
-                    }
+                    newlined = true;
+                    result.push('\n');
                 }
                 _ => {
+                    newlined = false;
                     result.push(c);
                     self.lost_context();
                 }
+            }
+            if newlined {
+                result.push('\t');
             }
         }
     }
