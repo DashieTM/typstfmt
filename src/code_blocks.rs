@@ -14,9 +14,9 @@ pub(crate) fn format_code_blocks(
     // let mut code = utils::find_child(parent, &|x| x.kind() == Code);
     // let code = if let Some(code) = code { code } else { parent };
     //
-    // if parent.children().any(|c| c.kind() == LineComment) {
-    //     return format_code_blocks_breaking(parent, children, ctx);
-    // }
+    if parent.children().any(|c| c.kind() == LineComment) {
+        return format_code_blocks_breaking(parent, children, ctx);
+    }
 
     if parent.is_empty() || parent.children().all(|c| c.kind() == Space) {
         return format_code_blocks_tight(parent, children, ctx);
