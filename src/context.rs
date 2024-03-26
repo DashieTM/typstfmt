@@ -69,8 +69,16 @@ impl Ctx {
         let mut newlined = false;
         for c in s.chars() {
             match c {
-                '\t' => (),
-                ' ' => (),
+                '\t' => {
+                    if !newlined {
+                        result.push(c);
+                    }
+                }
+                ' ' => {
+                    if !newlined {
+                        result.push(c);
+                    }
+                }
                 '\n' => {
                     newlined = true;
                     result.push('\n');
@@ -80,9 +88,6 @@ impl Ctx {
                     result.push(c);
                     self.lost_context();
                 }
-            }
-            if newlined {
-                result.push('\t');
             }
         }
     }
