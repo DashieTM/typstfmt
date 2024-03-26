@@ -70,6 +70,7 @@ impl Ctx {
         for c in s.chars() {
             match c {
                 '\t' => (),
+                ' ' => (),
                 '\n' => {
                     newlined = true;
                     result.push('\n');
