@@ -75,9 +75,9 @@ impl Ctx {
                     }
                 }
                 ' ' => {
-                    if !newlined {
+                    // if !newlined {
                         result.push(c);
-                    }
+                    // }
                 }
                 '\n' => {
                     newlined = true;
