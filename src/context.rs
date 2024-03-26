@@ -66,8 +66,22 @@ impl Ctx {
     /// makes the context aware it missed info,
     /// should be called when pushing directly in result.
     pub(crate) fn push_idk(&mut self, s: &str, result: &mut String) {
-        let s = s.trim_start();
-        result.push_str(s);
+        for c in s.chars() {
+            match c {
+                '\n' => {
+                    if self.consec_new_line <= 1 {
+                        self.consec_new_line += 1;
+                        result.push('\n');
+                    } else {
+                        debug!("IGNORED newline");
+                    }
+                }
+                _ => {
+                    result.push(c);
+                    self.lost_context();
+                }
+            }
+        }
     }
 
     /// adds an indentation for each line the input except the first to match the current level of indentation.
