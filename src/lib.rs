@@ -79,7 +79,7 @@ fn visit(node: &LinkedNode, ctx: &mut Ctx) -> String {
                 node.text().to_string()
             }
             ctx.lost_context();
-            node.into_text().to_string()
+            &node.into_text().to_string()
         }
         Equation => math::format_equation(node, &res, ctx),
         Math => math::format_math(node, &res, ctx),
