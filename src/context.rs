@@ -67,6 +67,7 @@ impl Ctx {
     /// should be called when pushing directly in result.
     pub(crate) fn push_idk(&mut self, s: &str, result: &mut String) {
         let mut newlined = false;
+        let mut counter = 0;
         for c in s.chars() {
             match c {
                 '\t' => {
@@ -75,9 +76,12 @@ impl Ctx {
                     }
                 }
                 ' ' => {
-                    // if !newlined {
+                    if counter < 1 {
+                        counter += 1;
+                    } else {
+                        counter = 0;
                         result.push(c);
-                    // }
+                    }
                 }
                 '\n' => {
                     newlined = true;
