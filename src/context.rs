@@ -76,7 +76,7 @@ impl Ctx {
                     }
                 }
                 ' ' => {
-                    result.push('\t');
+                    result.push(' ');
                     self.lost_context();
                 }
                 '\n' => {
