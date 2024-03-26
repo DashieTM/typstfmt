@@ -13,7 +13,10 @@ pub(crate) fn format_code_blocks(
     let parent_is_loop = [Some(ForLoop), Some(WhileLoop)].contains(&parent.parent_kind());
     let mut code = utils::find_child(parent, &|x| x.kind() == Code);
     if code.is_none() {
-        code = utils::find_child(parent, &|x| x.kind() == Raw);
+        code = utils::find_child(parent, &|x| {
+
+        dbg!(x.kind());
+            x.kind() == Raw});
     }
     let code = code.unwrap();
 
