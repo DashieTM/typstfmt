@@ -73,13 +73,10 @@ fn visit(node: &LinkedNode, ctx: &mut Ctx) -> String {
         }
         LetBinding => format_let_binding(node, &res, ctx),
         Conditional => conditional_format(node, &res, ctx),
-        Raw | BlockComment => {
-            if ctx.config.format_code {
-                ctx.lost_context();
-                return node.text().to_string();
-            }
+        Raw => markup::format_content_blocks(node, &res, ctx),
+        BlockComment => {
             ctx.lost_context();
-            node.clone().into_text().to_string()
+            node.text().to_string()
         }
         Equation => math::format_equation(node, &res, ctx),
         Math => math::format_math(node, &res, ctx),
