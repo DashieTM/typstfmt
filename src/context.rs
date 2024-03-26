@@ -76,12 +76,8 @@ impl Ctx {
                     }
                 }
                 ' ' => {
-                    if counter < 1 {
-                        counter += 1;
-                    } else {
-                        counter = 0;
-                        result.push(c);
-                    }
+                    result.push(c);
+                    self.lost_context();
                 }
                 '\n' => {
                     newlined = true;
