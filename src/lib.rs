@@ -76,7 +76,7 @@ fn visit(node: &LinkedNode, ctx: &mut Ctx) -> String {
         Raw | BlockComment => {
             if ctx.config.format_code {
                 ctx.lost_context();
-                node.text().to_string()
+                return node.text().to_string();
             }
             ctx.lost_context();
             &node.into_text().to_string()
