@@ -73,7 +73,7 @@ fn visit(node: &LinkedNode, ctx: &mut Ctx) -> String {
         }
         LetBinding => format_let_binding(node, &res, ctx),
         Conditional => conditional_format(node, &res, ctx),
-        Raw => markup::format_content_blocks(node, &res, ctx),
+        Raw => raw_format(node, &res, ctx), 
         BlockComment => {
             ctx.lost_context();
             node.text().to_string()
@@ -112,6 +112,14 @@ fn format_default(node: &LinkedNode, children: &[String], ctx: &mut Ctx) -> Stri
 fn no_format(parent: &LinkedNode, children: &[String], ctx: &mut Ctx) -> String {
     let mut res = String::new();
     ctx.push_raw_in(parent.text(), &mut res);
+    for s in children {
+        ctx.push_raw_in(s, &mut res);
+    }
+    res
+}
+
+fn raw_format(parent: &LinkedNode, children: &[String], ctx: &mut Ctx) -> String {
+    let mut res = String::new();
     for s in children {
         ctx.push_raw_in(s, &mut res);
     }
